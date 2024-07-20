@@ -56,12 +56,13 @@ jobs:
       - name: Download iOS SDK
         if: steps.SDK.outputs.cache-hit != 'true'
         run: |
-          git clone --quiet --depth=1 https://github.com/arichorn/sdks/
+          git clone --quiet --depth=1 https://github.com/theos/sdks/
           cd sdks
-          git sparse-checkout set --no-cone iPhoneOS16.2.sdk
+          git sparse-checkout set --no-cone iPhoneOS16.5.sdk
+          git checkout
           mv *.sdk $THEOS/sdks
         env:
-          THEOS: ${{ github.workspace }}/theos
+          THEOS: ${{ github.workspace }}/
 
       - name: Setup Theos Jailed
         uses: actions/checkout@v4
